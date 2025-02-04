@@ -19,6 +19,46 @@
     <script src="https://js.puter.com/v2/"></script>
   </head>
   <body>
+    <script>
+      puter.ui.setMenubar({
+          items: [
+              {
+                  label: 'File',
+                  items: [
+                      {
+                          label: 'Exit',
+                          action: () => {
+                              puter.exit();
+                          }
+                      }
+                  ]
+              },
+              {
+                  label: 'Tabs',
+                  items: [
+                      {
+                          label: 'Timer',
+                          action: () => {
+                              showTimer();
+                          }
+                      },
+                      {
+                          label: 'Clock',
+                          action: () => {
+                              showClock();
+                          }
+                      },
+                      {
+                          label: 'Alarms',
+                          action: () => {
+                              showAlarm();
+                          }
+                      }
+                  ]
+              },
+          ]
+      });
+  </script>
     <header>
       <div id="header">
         <div class="item item1" onclick="showSettings()">
