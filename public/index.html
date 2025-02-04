@@ -26,6 +26,13 @@
                   label: 'File',
                   items: [
                       {
+                          label: 'Settings',
+                          action: () => {
+                              showSettings();
+                          }
+                      },
+		      '-',
+		      {
                           label: 'Exit',
                           action: () => {
                               puter.exit();
