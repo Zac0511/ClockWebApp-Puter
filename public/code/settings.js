@@ -1,57 +1,57 @@
 // Local Storage Variables
 
 // False = dd/mm, True = mm/dd
-var dateFormat = puter.kv.get('dateFormat') || "false";
+var dateFormat = localStorage.getItem('dateFormat') || "false";
 // True = 12, False = 24
-var clockMode = puter.kv.get('clockMode') || "true";
+var clockMode = localStorage.getItem('clockMode') || "true";
 // False = Light, True = Dark
-var isDark = puter.kv.get('darkMode') || "false";
+var isDark = localStorage.getItem('darkMode') || "false";
 // False = No, True = Yes
-var doubleDigits = puter.kv.get('doubleDigits') || "false";
+var doubleDigits = localStorage.getItem('doubleDigits') || "false";
 // Settings animation, True = On, False = Off
-var settingsAnimation = puter.kv.get('settingsAnim') || "true";
+var settingsAnimation = localStorage.getItem('settingsAnim') || "true";
 // Timer Transition, True = On, False = Off
-var timerTransition = puter.kv.get("timerTrans") || "true";
+var timerTransition = localStorage.getItem("timerTrans") || "true";
 // False = Timer, True = Stopwatch
-var isStopwatch = puter.kv.get("isStopwatch") || "false";
+var isStopwatch = localStorage.getItem("isStopwatch") || "false";
 // Active Alarm Sound
-var activeAlarmSound = puter.kv.get("activeAlarmSound") || "0";
+var activeAlarmSound = localStorage.getItem("activeAlarmSound") || "0";
 // Hide focus mode
-var hideFocusMode = puter.kv.get("hideFocusMode") || "false";
+var hideFocusMode = localStorage.getItem("hideFocusMode") || "false";
 // Current Font
-var currentFont = puter.kv.get("currentFont") || "0";
+var currentFont = localStorage.getItem("currentFont") || "0";
 // Holds custom theme colour
-var themeColour = puter.kv.get('themeColour') || '#FF0000';
+var themeColour = localStorage.getItem('themeColour') || '#FF0000';
 $('#themeChangerCon').append('<input type="color" class="settingsButton" id="colourButton" value="' + themeColour + '">')
 // Snooze Alarm Number
-var snoozeAlarmNumber = Number(puter.kv.get('snoozeAlarmNumber') || 0);
+var snoozeAlarmNumber = Number(localStorage.getItem('snoozeAlarmNumber') || 0);
 // True = Analog, False = Digital
-var isAnalog = puter.kv.get('isAnalog') || "false";
+var isAnalog = localStorage.getItem('isAnalog') || "false";
 // True = Switcher hidden, False = Switcher showing
-var isClockSwitcher = puter.kv.get('isClockSwitcher') || "false";
+var isClockSwitcher = localStorage.getItem('isClockSwitcher') || "false";
 // True = Switcher hidden, False = Switcher showing
-var isTimerSwitcher = puter.kv.get('isTimerSwitcher') || "false";
+var isTimerSwitcher = localStorage.getItem('isTimerSwitcher') || "false";
 // Stores what time zone is active
-var timeZoneNumber = Number(puter.kv.get('timeZoneNumber')) || 24;
+var timeZoneNumber = Number(localStorage.getItem('timeZoneNumber')) || 24;
 
 // Local Storage retrieval and setups
 
-if (puter.kv.get('darkMode') == "true") {
+if (localStorage.getItem('darkMode') == "true") {
   $("html").addClass("dark");
   $("#themeButton").html("Dark");
   $("meta[name='theme-color']").attr("content", "rgb(76, 82, 85)");
 }
 
-if (puter.kv.get('clockMode') == "false") {
+if (localStorage.getItem('clockMode') == "false") {
   $("#clockModeButton").prop("checked", true);
   
 }
 
-if (puter.kv.get('dateFormat') == "true") {
+if (localStorage.getItem('dateFormat') == "true") {
   $("#dateFormatButton").html("MM/DD");
 }
 
-if (puter.kv.get('doubleDigits') == "true") {
+if (localStorage.getItem('doubleDigits') == "true") {
   $("#doubleDigitsButton").prop("checked", true);
   $("#span4").html("00");
   $("#span5").html("00");
@@ -62,17 +62,17 @@ if (puter.kv.get('doubleDigits') == "true") {
   $("#seconds").attr("placeholder", "00");
 }
 
-if (puter.kv.get('settingsAnim') == "false") {
+if (localStorage.getItem('settingsAnim') == "false") {
   $("#setAnimButton").prop("checked", false);
 }
 
-if (puter.kv.get('timerTrans') == "false") {
+if (localStorage.getItem('timerTrans') == "false") {
   $("#ttsTransButton").prop("checked", false);
   $("#clockChanger").css("transition","0s");
   $("#timerChange").css("transition","0s");
 }
 
-if (puter.kv.get('isStopwatch') == "true") {
+if (localStorage.getItem('isStopwatch') == "true") {
   $("#timerChange").css("transform","rotate(180deg)");
   $(".timerMain").hide();
   $(".stopwatch").show();
@@ -84,7 +84,7 @@ if (puter.kv.get('isStopwatch') == "true") {
   $("#timerSVG").html('<path fill-rule="evenodd" clip-rule="evenodd" d="M50 92C71.5391 92 89 74.5391 89 53C89 31.4609 71.5391 14 50 14C28.4609 14 11 31.4609 11 53C11 74.5391 28.4609 92 50 92ZM50 88.6571C69.6929 88.6571 85.6571 72.6929 85.6571 53C85.6571 33.3071 69.6929 17.3429 50 17.3429C30.3071 17.3429 14.3429 33.3071 14.3429 53C14.3429 72.6929 30.3071 88.6571 50 88.6571Z" fill="black"/><path fill-rule="evenodd" clip-rule="evenodd" d="M83 53C83 71.2254 68.2254 86 50 86C31.7746 86 17 71.2254 17 53C17 34.7746 31.7746 20 50 20C68.2254 20 83 34.7746 83 53ZM47.7241 28.5345C47.7241 26.9633 48.9978 25.6897 50.569 25.6897C52.1401 25.6897 53.4138 26.9633 53.4138 28.5345V45.679L61.0812 38.0116C62.1922 36.9006 63.9934 36.9006 65.1044 38.0116C66.2153 39.1226 66.2153 40.9238 65.1044 42.0348L53.0348 54.1044C52.8657 54.2735 52.6806 54.4168 52.4844 54.5345C51.9789 54.995 51.3067 55.2759 50.569 55.2759C48.9978 55.2759 47.7241 54.0022 47.7241 52.431V28.5345Z" fill="black"/><rect x="47" y="4" width="6" height="12" rx="2" fill="black"/><rect x="43" y="9" width="5" height="14" rx="2" transform="rotate(-90 43 9)" fill="black"/>');
 }
 
-if (puter.kv.get("hideFocusMode") == "true") {
+if (localStorage.getItem("hideFocusMode") == "true") {
   $("#hideFocusModeBttn").prop("checked", true);
   $("#focusMode").hide();
 }
@@ -115,11 +115,11 @@ function clockModeChanger() {
     if (clockMode == "true") {
       clockMode = "false";
       $("#clockModeButton").prop("checked", true);
-      puter.kv.set('clockMode', clockMode);
+      localStorage.setItem('clockMode', clockMode);
     } else {
       clockMode = "true";
       $("#clockModeButton").prop("checked", false);
-      puter.kv.set('clockMode', clockMode);
+      localStorage.setItem('clockMode', clockMode);
     }
 }
   
@@ -128,11 +128,11 @@ function dateFormatChanger() {
     if (dateFormat == "false") {
       dateFormat = "true";
       $("#dateFormatButton").html("MM/DD");
-      puter.kv.set('dateFormat', dateFormat);
+      localStorage.setItem('dateFormat', dateFormat);
     } else {
       dateFormat = "false";
       $("#dateFormatButton").html("DD/MM");
-      puter.kv.set('dateFormat', dateFormat);
+      localStorage.setItem('dateFormat', dateFormat);
     }
 }
   
@@ -159,7 +159,7 @@ function doubleDigitsChanger() {
       $("#seconds").attr("placeholder", "0");
       $("#doubleDigitsButton").prop("checked", false);
     }
-    puter.kv.set('doubleDigits', doubleDigits);
+    localStorage.setItem('doubleDigits', doubleDigits);
 }
   
 // Turns settings opening animation on / off
@@ -171,7 +171,7 @@ function settingsAnimControl() {
       settingsAnimation = "true";
       $("#setAnimButton").prop("checked", true);
     }
-    puter.kv.set('settingsAnim', settingsAnimation);
+    localStorage.setItem('settingsAnim', settingsAnimation);
 }
 
 // Turns transition from Timer to Stopwatch on and off
@@ -188,7 +188,7 @@ function timerTransitionAni() {
       $("#timerChange").css("transition","0.25s");
       $("#clockChanger").css("transition","0.25s");
     }
-    puter.kv.set('timerTrans', timerTransition);
+    localStorage.setItem('timerTrans', timerTransition);
 }
   
 function hideFocusModeCon() {
@@ -201,7 +201,7 @@ function hideFocusModeCon() {
       $("#focusMode").hide();
       $("#hideFocusModeBttn").prop("checked", true);;
     }
-    puter.kv.set('hideFocusMode', hideFocusMode);
+    localStorage.setItem('hideFocusMode', hideFocusMode);
 }
   
 function hideClockSwitcher() {
@@ -214,7 +214,7 @@ function hideClockSwitcher() {
       $("#hideClockSwitcher").prop("checked", false);
       $("#clockChanger").show();
     }
-    puter.kv.set('isClockSwitcher', isClockSwitcher);
+    localStorage.setItem('isClockSwitcher', isClockSwitcher);
 }
   
 function hideTimerSwitcher() {
@@ -227,7 +227,7 @@ function hideTimerSwitcher() {
       $("#hideTimerSwitcher").prop("checked", false);
       $("#timerChangerContainer").show();
     }
-    puter.kv.set('isTimerSwitcher', isTimerSwitcher);
+    localStorage.setItem('isTimerSwitcher', isTimerSwitcher);
 }
 
 function changeSnoozeLenght(x) {
@@ -238,7 +238,7 @@ function changeSnoozeLenght(x) {
       $("#alarmSnoozeButton").html(x + 1 + " minutes");
     }
     snoozeAlarmNumber = x;
-    puter.kv.set('snoozeAlarmNumber', snoozeAlarmNumber)
+    localStorage.setItem('snoozeAlarmNumber', snoozeAlarmNumber)
   }
   
 // Changes alarm sound
@@ -248,7 +248,7 @@ function changeAlarmSound(x) {
     $("#alarmSoundButton").html(alarmNames[x]);
     audio = new Audio(alarmSounds[activeAlarmSound]);
   
-    puter.kv.set("activeAlarmSound", activeAlarmSound)
+    localStorage.setItem("activeAlarmSound", activeAlarmSound)
   
     // Resets alarm to beginning if already used
     audio.addEventListener('ended', function() {
@@ -299,7 +299,7 @@ function changeFont(x) {
       $("#fontButton").html("Roboto");
       currentFont = x;
     }
-    puter.kv.set('currentFont', currentFont);
+    localStorage.setItem('currentFont', currentFont);
 }
 
 // Swaps between timer and stopwatch
@@ -327,7 +327,7 @@ function timerChanger() {
       $("#timerLabel").html("Timer");
       isStopwatch = "false";
     }
-    puter.kv.set('isStopwatch', isStopwatch);
+    localStorage.setItem('isStopwatch', isStopwatch);
 }
 
 function clockChanger() {
@@ -344,7 +344,7 @@ function clockChanger() {
       $(".analog").hide();
       isAnalog = "false";
     }
-    puter.kv.set('isAnalog', isAnalog);
+    localStorage.setItem('isAnalog', isAnalog);
 }
 
 // Changes between light and dark
@@ -360,7 +360,7 @@ function themeChanger() {
       $("#themeButton").html("Light");
       $("meta[name='theme-color']").attr("content", "#D3D3D3");
     }
-    puter.kv.set('darkMode', isDark);
+    localStorage.setItem('darkMode', isDark);
 }
 
 // Resets theme colour
@@ -373,24 +373,9 @@ function resetThemeColour() {
 
 // Clears app data and reloads page
 function resetApp() {
-  puter.ui.alert('Are you sure you want to reset all settings ?', [
-    {
-        label: 'Reset',
-        value: 'reset',
-        type: 'danger',
-    },
-    {
-        label: 'Cancel',
-        value: 'cancel',
-        type: 'info',
-    }
-]).then((resp) => {
-  if (resp === "reset") {
-    puter.kv.flush();
+    localStorage.clear();
     resetThemeColour();
     clearInterval(interval)
-    puter.kv.set("timeZoneNumber", 24)
+    localStorage.setItem("timeZoneNumber", 24)
     location.reload();
-  }
-});
 }
