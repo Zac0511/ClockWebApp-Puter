@@ -1,0 +1,1406 @@
+/* Fonts */
+
+@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@900&display=swap'); /* font-family: 'Zen Kaku Gothic Antique', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap'); /* font-family: 'Major Mono Display', monospace; */
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Wet+Paint&display=swap'); /* font-family: 'Rubik Wet Paint', cursive; */
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Microbe&display=swap'); /* font-family: 'Rubik Microbe', cursive; */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap'); /* font-family: 'Roboto Mono', monospace; */
+
+/* Variables */
+
+:root {
+  --themeColour: #FF0000;
+}
+
+/* Computer UI + Carry over to Mobile */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+
+header {
+  position: fixed;
+  height: 8.5vh;
+  width: 100%;
+  background-color: #D3D3D3;
+  border-radius: 0px 0px 10vh 10vh;
+  z-index: 10;
+}
+
+#timerPannel, #alarmPannel {
+  display: none;
+}
+
+.item {
+  position: absolute;
+  height: 8.5vh;
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  transition: 0.25s;
+}
+.item1 { border-radius: 0 0 0 10vh; }
+.item2 { left: 25%; }
+.item3 { left: 50%; }
+.item4 {
+  left: 75%;
+  border-radius: 0 0 10vh 0;
+}
+
+.item:hover {
+  height: 9.5vh;
+  background-color: #B3B3B3;
+  cursor: pointer;
+}
+
+.timerInput, .timerDisplay, .stopwatchDisplay {
+  position: fixed;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  left: 50%;
+  top: 50%;
+  font-size: 10vh;
+  transform: translate(-50%, -70%);
+}
+
+.gridDiv {
+  padding: 2vh;
+}
+
+#hours, #minutes, #seconds, .smallLabel, .gridDiv, #span1, #span2, #span3, .stopwatchNumber {
+  display: inline;
+}
+
+.stopwatch, #stopwatchPlayContainer, #stopwatchResetContainer, .timerDisplay {
+  display: none;
+}
+
+#hours, #minutes, #seconds, #span1, #span2, #span3, .stopwatchNumber {
+  color: var(--themeColour);
+  font-size: 12.5vh;
+  width: 15vh;
+  border: none;
+  outline: none;
+  text-align: center;
+}
+
+#span7, #milliLabel {
+  font-size: 9.375vh;
+}
+
+#hours:hover, #minutes:hover, #seconds:hover {
+  cursor: pointer;
+  border-bottom: 0.5vh solid var(--themeColour);
+}
+
+.digital {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 20vh;
+  width: 65vh;
+  background-color: black;
+  border-radius: 5vh;
+  color: var(--themeColour);
+}
+
+.display {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  font-size: 15vh;
+}
+
+.ampm {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 4vh;
+  transform: translate(-50%, 80%);
+}
+
+.date {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  font-size: 4vh;
+  transform: translate(-50%, -185%);
+}
+
+.analog {
+  width: 300px;
+  height: 300px;
+  background-color: #f5f5f5;
+  border-radius: 50%;
+  border: 10px solid #000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-60%) scale(0.75);
+  transition: 0.75s;
+  margin: 20px auto;
+}
+
+.border-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 5px solid #777;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.hand {
+  background-color: #333;
+  position: absolute;
+  transform-origin: bottom center;
+  z-index: 2;
+}
+
+.hour-hand {
+  width: 10px;
+  height: 100px;
+  left: calc(50% - 5px);
+  top: calc(50% - 100px);
+  border-radius: 8px 8px 0 0;
+  transition-timing-function: steps(1);
+}
+
+.minute-hand {
+  width: 8px;
+  height: 140px;
+  left: calc(50% - 4px);
+  top: calc(50% - 140px);
+  border-radius: 8px 8px 0 0;
+  transition-timing-function: steps(1);
+}
+
+.second-hand {
+  width: 4px;
+  height: 150px;
+  left: calc(50% - 2px);
+  top: calc(50% - 150px);
+  background-color: var(--themeColour);
+  transition-timing-function: steps(1);
+}
+
+.center-dot {
+  width: 14px;
+  height: 14px;
+  background-color: #222;
+  border-radius: 50%;
+  position: absolute;
+  left: calc(50% - 7px);
+  top: calc(50% - 7px);
+  z-index: 3;
+}
+
+.number {
+  position: absolute;
+  font-size: 35px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  z-index: 1;
+}
+
+.number-12 {
+  top: 10%;
+  left: calc(50% - 17px);
+}
+
+.number-3 {
+  top: calc(50% - 20px);
+  right: 10px;
+}
+
+.number-6 {
+  bottom: 10%;
+  left: calc(50% - 10px);
+}
+
+.number-9 {
+  top: calc(50% - 20px);
+  left: 10px;
+}
+
+#settings {
+  position: fixed;
+  top: 0;
+  left: -1vh;
+  height: 1vh;
+  width: 1vh;
+  background-color: #B3B3B3;
+  transition: 1.5s;
+  z-index: 10;
+}
+
+.settingsHeader {
+  display: none;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  width: 100%;
+  height: 12vh;
+  z-index: 11;
+  width: 100%;
+  background: linear-gradient(to bottom, #f5f5f5, rgba(0, 0, 0, 0));
+}
+
+.settingsBuffer {
+  height: 10vh;
+}
+
+.borderRadius {
+  border-radius: 0 0 150vh 0;
+}
+
+label {
+  font-size: 5vh;
+  transition: 0.25s;
+}
+
+.item:hover label {
+  cursor: pointer;
+  color: #36454F;
+  font-size: 6vh;
+}
+
+path, rect {
+  transition: 0.25s;
+}
+
+.item:hover path, .item:hover rect {
+  fill: #36454F;
+}
+
+#mobile {
+  display: none;
+}
+
+.headerSVG {
+  height: 8.5vh;
+  width: 8.5vh;
+  transition: 0.25s;
+}
+
+.item:hover .headerSVG {
+  height: 9.5vh;
+  width: 9.5vh;
+}
+
+#settings-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  height: 100%;
+  width: 45%;
+  display: none;
+  transition: 0.5s;
+}
+
+.settingsHeading {
+  text-align: left;
+  font-size: 6.5vh;
+  width: 100%;
+  padding: 1vh;
+}
+
+.settingsHeading:hover {
+  cursor: pointer;
+}
+
+.static {
+  text-align: center;
+  font-size: 7.5vh;
+  position: absolute;
+  top: 50%;
+  transition: 1.5s;
+  transform: translate(0, -50%);
+}
+
+.settingsLabel {
+  font-size: 4vh;
+  font-weight: bold;
+  text-indent: 5vw;
+  margin-top: 2vw;
+}
+
+.settingsButton {
+  position: absolute;
+  font-size: 4vh;
+  right: 5vw;
+  margin-top: -7vh;
+  border: 0.5vh solid black;
+  padding: 1vh;
+  border-radius: 2.5vh;
+  transition: 0.25s;
+}
+
+.settingsButton:hover {
+  cursor: pointer;
+  color: #36454F;
+  border-color: #36454F;
+}
+
+#colourButton {
+  background-color: var(--themeColour);
+  padding: 3.5vh;
+  color: var(--themeColour);
+}
+
+#close-settings {
+  position: absolute;
+  right: 28%;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-size: 6vh;
+  transition: 0.25s;
+  z-index: 2;
+}
+
+#close-settings:hover, .closeSwitcher:hover {
+  cursor: pointer;
+  color: grey;
+}
+
+.timerControls {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  width: 60vh;
+  transition: 1s;
+  bottom: 27.9vh;
+}
+
+ul {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#startTimer:hover, #pauseTimer:hover, #addAlarm:hover, #resetTimer:hover, #startStopwatch:hover, #resetStopwatch:hover, #pauseStopwatch:hover, #remove:hover, #submit:hover, .cancelAlarm:hover, .snoozeAlarm:hover, #timerChange:hover, #focusMode:hover, .removeFinalAlarm:hover, #clockChanger:hover, .deleteData:hover, .cancelData:hover {
+  cursor: pointer;
+}
+
+#addAlarm {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 3.5vh;
+  height: 12.5vh;
+  width: 12.5vh;
+}
+
+#focusMode, #clockChanger {
+  height: 11vh;
+  width: 11vh;
+}
+
+.clockControls {
+  width: 45vh;
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  bottom: 20vh;
+  transition: 0.75s;
+}
+
+.clockMove {
+  bottom: 12vh;
+}
+
+hr {
+  margin-top: 5vh;
+  width: 85%;
+}
+
+.buildInfo {
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+  padding: 2.5vh;
+  width: 100%;
+  font-family: "Arial";
+  font-weight: lighter;
+  text-align: center;
+  font-size: 2.5vh;
+}
+
+.buildInfo div {
+  font-size: 2vh;
+  padding-top: 0.5vh;
+  padding-bottom: 0.5vh;
+}
+
+.buildInfo div a {
+  color: #000;
+}
+
+.alarms-container {
+  position: absolute;
+  left: 50%;
+  top: 8.5vh;
+  height: 91.5vh;
+  transform: translate(-50%);
+  width: 65%;
+  transition: 0.5s;
+}
+
+.alarm, .printedAlarm {
+  position: relative;
+  left: 50%;
+  margin-top: 5vh;
+  transform: translate(-50%);
+  width: 50%;
+  height: 20vh;
+  background-color: #B3B3B3;
+  border-radius: 5vh;
+}
+
+.printedAlarm {
+  height: 15vh;
+}
+
+.buffer {
+  background-color: #FFF;
+  height: 15vh;
+}
+
+.switch {
+  position: absolute;
+  margin-top: -5vh;
+  right: 5vw;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch2 {
+  margin-top: -3.5vh;
+  right: 10.5vh;
+}
+
+.switch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: gray;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .slider {
+  background-color: var(--themeColour);
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+
+.alarmName {
+  position: relative;
+  left: 50%;
+  top: 1.5vh;
+  transform: translate(-50%);
+  text-align: left;
+  font-weight: bold;
+  font-size: 4.5vh;
+  width: 80%;
+  border: none;
+  border-bottom: 0.5vh solid #000;
+  outline: none;
+  background-color: #B3B3B3;
+}
+
+.alarmTime {
+  position: relative;
+  top: 4vh;
+  left: 7vh;
+  text-align: center;
+  font-size: 5vh;
+  border: none;
+  outline: none;
+  background-color: #B3B3B3;
+}
+
+#remove, .removeFinalAlarm {
+  position: absolute;
+  right: 7.8vh;
+  bottom: 2vh;
+  text-align: center;
+  font-size: 3.5vh;
+  color: #F00;
+}
+
+.removeFinalAlarm {
+  position: absolute;
+  top: 7.5vh;
+  right: 4.5vh;
+  height: 6vh;
+  width: 6vh;
+  fill: #F00;
+}
+
+#submit {
+  position: absolute;
+  bottom: 7vh;
+  right: 7.5vh;
+  text-align: center;
+  color: #00F;
+  font-size: 3.5vh;
+}
+
+.printAlarmName {
+  position: relative;
+  top: 0.5vh;
+  margin-left: 5vh;
+  overflow: auto;
+  width: 85%;
+  font-size: 5vh;
+  white-space: nowrap;
+}
+
+.printAlarmTime {
+  position: relative;
+  top: 1vh;
+  left: 5vh;
+  font-style: italic;
+  font-size: 3.5vh;
+  margin-top: -0.5vh;
+}
+
+#alarmActive, #timerActive {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  opacity: 99%;
+  background-color: #000;
+  display: none;
+  z-index: 10;
+}
+
+.activeAlarmName, .activeTimerName {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-150%);
+  font-size: 10vh;
+  text-align: center;
+  color: #FFF;
+}
+
+.activeTimerName {
+  transform: translate(-50%,-100%);
+}
+
+.activeAlarmTime {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 15vh;
+  color: var(--themeColour);
+}
+
+.cancelContainer, .snoozeContainer, .cancelTimerContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(50%,150%);
+  background-color: #0F0;
+  height: 10vh;
+  width: 10vh;
+  border-radius: 50%;
+}
+
+.cancelTimerContainer {
+  transform: translate(-50%, 25%);
+  background-color: var(--themeColour);
+}
+
+.snoozeContainer {
+  background-color: #F00;
+  transform: translate(-150%,150%);
+}
+
+.cancelAlarm, .snoozeAlarm {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  height: 9vh;
+  width: 9vh;
+}
+
+.switcher {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  height: 50vh;
+  width: 40vh;
+  background-color: #D3D3D3;
+  border-radius: 5vh;
+  display: none;
+}
+
+#timezone {
+  width: 57vh;
+}
+
+.switcherTitle {
+  font-size: 5vh;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.switcherContainer {
+  margin-top: 0vh;
+  height: 35vh;
+}
+
+.closeSwitcher {
+  position: absolute;
+  font-size: 6vh;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 1vh;
+  transition: 0.25s;
+}
+
+.switcherOption {
+  display: block;
+  font-size: 3.5vh;
+  text-align: center;
+  transition: 0.25s;
+}
+
+.switcherOption:hover {
+  cursor: pointer;
+  color: grey;
+}
+
+.scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.buttonSVG, .circleOnSVG, .barOnSVG, .coverSVG {
+  transition: 0.25s;
+}
+
+.buttonSVG:hover .circleOnSVG, .buttonSVG:hover .coverSVG {
+  fill: #B3B3B3;
+}
+
+.buttonSVG:hover .barOnSVG {
+  fill: #000;
+}
+
+.settingsContainer {
+  display: none;
+}
+
+li svg {
+  height: 10vh;
+
+}
+
+.clear, .clear2 {
+  background-color: #FFF;
+  transform: translate(-50%, -50%) scale(2);
+}
+
+.clear2 {
+  transform: translate(-50%, -60%) scale(1.25);
+}
+
+.loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+
+.resetConfirm {
+  width: 50vh;
+  height: 15vh;
+  z-index: 20;
+}
+
+.deleteData {
+  position: absolute;
+  bottom: 2vh;
+  left: 4.5vh;
+  font-size: 3.5vh;
+  color: #F00;
+}
+
+.dark .cancelData {
+  color: rgb(79, 184, 255);
+}
+
+.cancelData {
+  position: absolute;
+  bottom: 2vh;
+  right: 4.5vh;
+  font-size: 3.5vh;
+  color: #00F;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spinning-path {
+  animation: spin 2.25s linear infinite;
+}
+
+.classicFont { font-family: 'Major Mono Display', monospace; }
+.wetFont { font-family: 'Rubik Wet Paint', cursive; }
+.arialFont { font-family: 'Arial'; }
+.bubbleFont { font-family: 'Rubik Microbe', cursive; }
+.robotFont { font-family: 'Roboto Mono', monospace; }
+.defaultFont { font-family: 'Zen Kaku Gothic Antique', sans-serif; }
+
+/* Changes because of different fonts */
+
+.defaultFont .display {
+  font-size: 15vh;
+}
+
+.robotFont .display {
+  font-size: 12vh;
+  transform: translate(-50%, -53%);
+}
+
+.arialFont .date {
+  font-size: 3vh;
+  transform: translate(-50%, -270%);
+}
+
+.arialFont .display {
+  font-size: 14vh;
+  transform: translate(-50%, -50%);
+}
+
+.arialFont .ampm {
+  font-size: 3vh;
+  transform: translate(-50%, 170%);
+}
+
+.arialFont .settingsButton {
+  margin-top: -6vh;
+}
+
+.wetFont .date {
+  font-size: 3vh;
+  transform: translate(-50%, -250%);
+}
+
+.wetFont .display {
+  font-size: 12vh;
+  transform: translate(-50%, -50%);
+}
+
+.wetFont .ampm {
+  font-size: 3vh;
+  transform: translate(-50%, 150%);
+}
+
+.wetFont .settingsButton {
+  margin-top: -6vh;
+}
+
+.classicFont .date {
+  font-size: 4vh;
+  transform: translate(-50%, -240%);
+}
+
+.classicFont .display {
+  transform: translate(-50%, -55%);
+  font-size: 10vh;
+}
+
+.classicFont .ampm {
+  font-size: 4vh;
+  transform: translate(-50%, 130%);
+}
+
+.classicFont .settingsButton {
+  margin-top: -5.5vh;
+}
+
+.classicFont #settings-container{
+  width: 50%;
+}
+
+.classicFont .timerInput, .classicFont .stopwatchDisplay {
+  font-size: unset;
+}
+
+.bubbleFont .date {
+  transform: translate(-50%, -200%);
+}
+
+.bubbleFont .display {
+  transform: translate(-50%, -50%);
+  font-size: 13vh;
+}
+
+.bubbleFont .ampm {
+  transform: translate(-50%, 100%);
+}
+
+.bubbleFont .settingsButton {
+  margin-top: -6vh;
+}
+
+.responsiveDisplay {
+  display: flex;
+}
+
+/* Tablet UI */
+
+@media screen and (max-width: 1250px) {
+  .gridDiv {
+    padding: 0;
+    display: block;
+  }
+
+  .stopwatchDisplay {
+    transform: translate(-50%, -57%);
+  }
+
+  #headerSVGleft, #headerSVGright {
+    height: 6.375vh;
+    width: 6.375vh;
+  }
+
+  .switch {
+    margin-top: -4vh;
+  }
+
+  .switch2 {
+    margin-top: -3vh;
+    right: 10.5vh;
+  }
+  
+  .item:hover #headerSVGleft, .item:hover #headerSVGright {
+    height: 7.375vh;
+    width: 7.375vh;
+  }
+
+  .clockMove {
+    bottom: 20vh;
+  }
+
+  .analog {
+    transform: translate(-50%,-60%) scale(0.7);
+  }
+
+  .clockControls {
+    width: 70%;
+  }
+
+  label {
+    display: none;
+  }
+
+  .alarms-container {
+    width: 100%;
+  }
+
+  .alarm, .printedAlarm {
+    width: 85%;
+  }
+
+  #settings-container {
+    width: 55%;
+  }
+
+  #close-settings {
+    right: 23%;
+  }
+
+  .timerInput, .timerDisplay, .stopwatchDisplay {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  #hours, #minutes, #seconds {
+    font-size: 12.5vh;
+    width: 13.5vh;
+  }
+
+  .timerDisplay {
+    display: none;
+    font-size: 6vh;
+  }
+
+  .timerControls {
+    transform: translate(-50%);
+    width: 45vh;
+    bottom: 3vh;
+  }
+
+  .responsiveDisplay {
+    display: block;
+  }
+
+  .clear2 {
+    transform: translate(-50%, -60%) scale(0.7);
+  }
+
+  .clear {
+    transform: translate(-50%, -50%);
+  }
+}
+
+/* Mobile UI */
+
+@media screen and (max-width: 850px) {
+  #sideSVG {
+    height: 6.375vh;
+    width: 6.375vh;
+  }
+
+  .stopwatchDisplay {
+    transform: translate(-50%, -70%);
+  }
+
+  .timerControls {
+    bottom: 12.5vh;
+  }
+
+  .resetConfirm {
+    width: 90%;
+  }
+  
+  .item:hover #sideSVG {
+    height: 7.375vh;
+    width: 7.375vh;
+  }
+
+  header {
+    bottom: 2.5vh;
+    border-radius: 10vh 10vh 0 0;
+  }
+
+  .settingsPadding, .timerPadding, .clockPadding, .alarmPadding {
+    position: fixed;
+    bottom: 0;
+    height: 2.5vh;
+    width: 25%;
+    left: 0;
+    background-color: #D3D3D3;
+    transition: 0.25s;
+  }
+
+  .timerPadding { left: 25%; }
+  .clockPadding { left: 50%; }
+  .alarmPadding { left: 75%; }
+
+  .item1:hover .settingsPadding { background-color: #B3B3B3; }
+  .item2:hover .timerPadding { background-color: #B3B3B3; }
+  .item3:hover .clockPadding { background-color: #B3B3B3; }
+  .item4:hover .alarmPadding { background-color: #B3B3B3; }
+
+  .item1 { border-radius: 10vh 0 0 0; }
+  .item4 { border-radius: 0 10vh 0 0; }
+
+  .item {
+    bottom: 0vh;
+  }
+
+  #settings {
+    top: initial;
+    bottom: 0;
+  }
+
+  .borderRadius {
+    border-radius: 0 150vh 0 0;
+  }
+
+  .alarms-container {
+    top: 0;
+  }
+
+  #addAlarm {
+    bottom: 12.5vh;
+  }
+
+  #settings-container {
+    width: 90%;
+  }
+
+  .digital {
+    width: 90%;
+  }
+
+  #hours, #minutes, #seconds {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .settingsHeading {
+    font-size: 5vh;
+  }
+
+  #close-settings {
+    font-size: 5vh;
+    right: 1.5vh;
+  }
+
+  .settingsLabel {
+    font-size: 3vh;
+    margin-top: 5vw;
+  }
+
+  .settingsButton {
+    font-size: 3vh;
+    padding: 0.25vh;
+    margin-top: -4.75vh;
+  }
+
+  .buildInfo {
+    font-size: 1.5vh;
+  }
+
+  .buffer {
+    height: 20vh;
+  }
+  
+  .ampm {
+    transform: translate(-50%, 65%);
+  }
+
+  .display {
+    font-size: 10vh;
+  }
+
+  .date {
+    transform: translate(-50%, -165%);
+  }
+
+  /*Fonts*/
+
+  .defaultFont .display {
+    font-size: 10vh;
+  }
+
+  .arialFont .date {
+    font-size: 4vh;
+    transform: translate(-50%, -190%);
+  }
+
+  .arialFont .display {
+    font-size: 10vh;
+    transform: translate(-50%, -50%);
+  }
+
+  .arialFont .ampm {
+    font-size: 4vh;
+    transform: translate(-50%, 100%);
+  }
+
+  .arialFont .settingsButton {
+    margin-top: -4vh;
+  }
+
+  .classicFont #settings-container {
+    width: 100%;
+  }
+  
+  .classicFont .date {
+    font-size: 4vh;
+  }
+  
+  .classicFont .display {
+    font-size: 7.5vh;
+  }
+  
+  .classicFont .ampm {
+    font-size: 4vh;
+  }
+
+  .classicFont .settingsHeading {
+    font-size: 4.5vh;
+  }
+
+  .classicFont .settingsButton {
+    margin-top: -3.5vh;
+  }
+
+  .classicFont .settingsLabel {
+    font-size: 2.5vh;
+  }
+
+  .robotFont .date {
+    font-size: 3vh;
+    transform: translate(-50%, -220%);
+  }
+
+  .robotFont .display {
+    font-size: 8vh;
+  }
+
+  .robotFont .ampm {
+    font-size: 3vh;
+    transform: translate(-50%, 120%);
+  }
+
+  .robotFont .settingsButton {
+    margin-top: -5vh;
+  }
+
+  .robotFont #settings-container {
+    width: 95%;
+  }
+
+  .wetFont .display {
+    font-size: 8vh;
+  }
+
+  .wetFont #settings-container {
+    width: 100%;
+  }
+
+  .wetFont .settingsButton {
+    margin-top: -4.5vh;
+  }
+
+  .bubbleFont .date {
+    transform: translate(-50%, -180%);
+  } 
+
+  .bubbleFont .display {
+    transform: translate(-50%, -50%);
+    font-size: 8vh;
+  }
+
+  .bubbleFont .ampm {
+    transform: translate(-50%, 80%);
+  }
+
+  .bubbleFont .settingsButton {
+    margin-top: -4vh;
+  }
+
+  .bubbleFont #settings-container {
+    width: 99%;
+  }
+
+  .classicFont .timerInput, .classicFont .stopwatchDisplay {
+    font-size: 12.5vh;
+  }
+
+  #timezone {
+    width: 100%;
+  }
+
+  #timezone .switcherOption {
+    font-size: 3vh;
+  }
+
+  .alarmTime {
+    top: 2vh;
+    left: 50%;
+    transform: translate(-50%);
+    border: 0.5vh solid rgb(206, 192, 170);
+    border-radius: 2vh;
+    width: 80%;
+  }
+
+  #submit {
+    bottom: 0.25vh;
+    right: initial;
+    left: 6.5vh;
+  }
+
+  #remove {
+    bottom: 0.25vh;
+    right: 7.3vh;
+  }
+
+  .printAlarmName {
+    width: 80%;
+  }
+
+  #colourButton {
+    padding: 2.5vh;
+  }
+
+  .activeAlarmName, .activeTimerName {
+    font-size: 7vh;
+  }
+}
+
+#hours, #minutes, #seconds {
+  position: relative;
+  left: 1.5vh;
+}
+
+.smallLabel {
+  position: relative;
+  left: -1.5vh;
+  font-size: 12.5vh;
+}
+
+/* Dark Mode UI */
+
+/* Makes header SVGs white */
+.dark .headerSVG path, .dark .headerSVG rect, .dark .headerSVG circle {
+  fill: #f5f5f5;
+}
+
+.dark .item:hover path, .dark .item:hover rect, .dark .item:hover circle {
+  fill: #bbbbbb;
+}
+
+.dark .item:hover label {
+  color: #bbbbbb;
+}
+
+.dark #focusPath {
+  fill: #697074;
+}
+
+.dark #focusMode:hover #focusPath, .dark #clockChanger:hover #focusPath, .dark .border-ring {
+  fill: #36454F;
+}
+
+/* Colour for alarm creation menu */
+.dark .alarm, .dark .printedAlarm, .dark .alarmName, .dark .alarmTime {
+  background-color: rgb(102, 109, 113);
+  color: #f5f5f5;
+}
+
+/* Base background colours */
+.dark body, .dark input, .dark .buffer {
+  background-color: #292b2d;
+  color: #f5f5f5;
+}
+
+/* Clock Display dark colour */
+.dark .digital {
+  background-color: rgb(6, 6, 6);
+  color: var(--themeColour);
+}
+
+/* Settings header */
+.dark .settingsHeader {
+  background: linear-gradient(to bottom, rgb(43, 39, 39), rgba(0, 0, 0, 0));
+}
+
+/* Header bar colour */
+.dark header, .dark .alarmPadding, .dark .settingsPadding, .dark .clockPadding, .dark .timerPadding, .dark .analog {
+  background-color: rgb(76, 82, 85);
+}
+
+.dark .circleOnSVG, .dark .coverSVG {
+  fill: rgb(76, 82, 85);
+}
+
+.dark .barOnSVG {
+  fill: #172128;
+}
+
+/* Hover effect for header, and backgroud of svg */
+.dark .item:hover, .dark .circleOnSVG:hover, .dark .coverSVG:hover, .dark .item:hover .settingsPadding, .dark .item:hover .timerPadding, .dark .item:hover .clockPadding, .dark .item:hover .alarmPadding {
+  background-color: #697074; fill: #697074;
+}
+
+.dark .slider { background-color: #ccc; }
+.dark .buttonSVG:hover .circleOnSVG, .dark .buttonSVG:hover .coverSVG { fill: #697074; }
+.dark .buildInfo div a, .dark .number { color: #f5f5f5; }
+.dark #settings { background-color: rgb(102, 109, 113); }
+.dark .switcher { background-color: rgb(76, 82, 85); }
+.dark .settingsButton { border-color: rgb(206, 192, 170); }
+.dark .settingsButton:hover { border-color: #36454F; }
+.dark #remove, .dark .removeFinalAlarm { fill: #F00; }
+.dark #submit { color: rgb(79, 184, 255); }
+.dark .clear, .darl .clear2 { background-color: #292b2d; }
+
+/* Washed out red colours */
+.dark #span1, .dark #span2, .dark #span3, .dark .stopwatchNumber, .dark #hours, .dark #minutes, .dark #seconds  {
+  color: var(--themeColour);
+}
+
+/* Custom Font stuff */
+
+.defaultFont {
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+
+.classicFont {
+  font-family: 'Major Mono Display', monospace;
+}
+
+.wetFont {
+  font-family: 'Rubik Wet Paint', cursive;
+} 
+
+.arialFont {
+  font-family: 'Arial';
+}
+
+.bubbleFont {
+  font-family: 'Rubik Microbe', cursive;
+}
+
+.robotFont {
+  font-family: 'Roboto Mono', monospace;
+}
