@@ -373,24 +373,9 @@ function resetThemeColour() {
 
 // Clears app data and reloads page
 function resetApp() {
-  puter.ui.alert('Are you sure you want to reset all settings ?', [
-    {
-        label: 'Reset',
-        value: 'reset',
-        type: 'danger',
-    },
-    {
-        label: 'Cancel',
-        value: 'cancel',
-        type: 'info',
-    }
-]).then((resp) => {
-  if (resp === "reset") {
     puter.kv.flush();
     resetThemeColour();
     clearInterval(interval)
     puter.kv.set("timeZoneNumber", 24)
     location.reload();
   }
-});
-}
