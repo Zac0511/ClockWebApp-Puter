@@ -46,12 +46,12 @@ var snoozelengthValue = new Array(60000, 120000, 180000, 240000, 300000, 360000,
 
 var darkThemeMq = window.matchMedia("(prefers-color-scheme: dark)");
 if (darkThemeMq.matches) {
-  if (puter.kv.get('darkMode') == null) {
+  if (localStorage.getItem('darkMode') == null) {
     $("html").addClass("dark");
     $("#themeButton").html("Dark");
     $("meta[name='theme-color']").attr("content", "rgb(76, 82, 85)");
     isDark = "true";
-    puter.kv.set('darkMode', isDark);
+    localStorage.setItem('darkMode', isDark);
   }
 } else {
   // Theme set to light. Light is default.
@@ -183,7 +183,7 @@ function mainFunction() {
   // Prints users timezone
   $("#timeZoneButton").html(tza);
 
-  puter.kv.set("timeZoneNumber", timeZoneNumber)
+  localStorage.setItem("timeZoneNumber", timeZoneNumber)
   if (timeZoneNumber != 24 && timeZoneNumber != localTimeZoneNumber) {
     $(".display").html(timesInAllTimeZones[timeZoneNumber].time);
     $(".ampm").html(timesInAllTimeZones[timeZoneNumber].amPm);
@@ -231,7 +231,7 @@ setTimeout (function() {
   setInterval (function() {
     document.documentElement.style.setProperty('--themeColour', themeColour);
     themeColour = $("#colourButton").val();
-    puter.kv.set('themeColour', themeColour);  
+    localStorage.setItem('themeColour', themeColour);  
   },10)
 },10)
 
