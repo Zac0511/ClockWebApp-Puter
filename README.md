@@ -1,3 +1,8 @@
+This is the Puter version for the **Clock Web App**.
+The app can be found at : https://puter.com/app/clock-app
+***
+Original app description :
+
 <p align="center"><img width="125" src="public/media/icons/ReadMeIcon.svg"></p>
 <h1 align="center"><b>Clock Web App</b></h1>
 <p align="center"><a href="https://github.com/dwpery/ClockWebApp/releases"><img src="public/media/icons/VersionIcon.svg"></a></p>
