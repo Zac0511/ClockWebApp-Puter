@@ -1,5 +1,8 @@
 This is the Puter version for the **Clock Web App**.
 The app can be found at : https://puter.com/app/clock-app
+>[!warning]
+>This Puter app is no longer maintained and might not be up to date with the functionnalities of the Clock Web App.
+
 ***
 Original app description :
 
